@@ -1,0 +1,19 @@
+{
+  "name": "mesto-ad",
+  "version": "1.0.0",
+  "description": "Стартовый набор для Mesto",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArmenBarsegyan/mesto-ad.git"
+  },
+  "author": "ArmenBarsegyan",
+  "homepage": "https://github.com/ArmenBarsegyan/mesto-ad#readme",
+  "devDependencies": {
+    "vite": "^7.2.7"
+  }
+}
