@@ -13,13 +13,15 @@ const hideInputError = (formElement, inputElement, settings) => {
 };
 
 const checkInputValidity = (formElement, inputElement, settings) => {
-  hideInputError(formElement, inputElement, settings);
-  
-  const isValid = inputElement.checkValidity();
-  
-  if (!isValid) {
-    showInputError(formElement, inputElement, "Текст ошибки", settings);
-  }
+  if (inputElement.validity.patternMismatch)
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage || "");
+  else
+    inputElement.setCustomValidity("");
+
+  if (!inputElement.validity.valid)
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
+  else
+    hideInputError(formElement, inputElement, settings);
 };
 
 const hasInvalidInput = (inputList) =>
