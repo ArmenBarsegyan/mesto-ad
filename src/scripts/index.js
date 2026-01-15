@@ -1,3 +1,4 @@
+
 import {getUserInfo, getCardList, setUserInfo, setUserAvatar, addNewCard, deleteCardApi, changeLikeCardStatus } from "./components/api.js";
 import { createCardElement } from "./components/card.js";
 import { openModalWindow, closeModalWindow, setCloseModalWindowEventListeners } from "./components/modal.js";
@@ -155,26 +156,23 @@ const handleLogoClick = () => {
         championElement.textContent = 'Нет чемпиона';
       }
       
-           if (popularCardsContainer) {
+      if (popularCardsContainer) {
         popularCardsContainer.innerHTML = '';
         
-        popularCardsContainer.style.display = 'inline';
-        
-        const template = document.getElementById('popular-card-template');
-        
-        stats.popularCards.forEach((card, index) => {
-          const cardElement = template.content.cloneNode(true);
-          const popularCardText = cardElement.querySelector('.popup__popular-card-text');
-          
-          popularCardText.textContent = card.name + '\u00A0\u00A0'; // два неразрывных пробела
-          
-          popularCardsContainer.appendChild(cardElement);
-        });
-        
-        // Если карточек нет, показываем сообщение
-        if (stats.popularCards.length === 0) {
+        if (stats.popularCards.length > 0) {
+          stats.popularCards.forEach((card, index) => {
+            const cardSpan = document.createElement('span');
+            cardSpan.classList.add('popup__info-term');
+            cardSpan.textContent = card.name;
+            
+            popularCardsContainer.appendChild(cardSpan);
+            
+            if (index < stats.popularCards.length - 1) {
+              popularCardsContainer.appendChild(document.createTextNode(' '));
+            }
+          });
+        } else {
           const noCardsText = document.createElement('span');
-          noCardsText.classList.add('popup__popular-card-text');
           noCardsText.textContent = 'Нет популярных карточек';
           popularCardsContainer.appendChild(noCardsText);
         }
