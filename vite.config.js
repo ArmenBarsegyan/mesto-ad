@@ -5,5 +5,6 @@ export default defineConfig({
     open: false,
     host: true,
     port: 5173
-  }
+  },
+  base: './',
 });

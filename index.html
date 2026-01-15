@@ -21,14 +21,11 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <div
-            class="profile__image"
-            style="background-image: url('./src/images/avatar.jpg')"
-          ></div>
+          <div class="profile__image"></div>
           <div class="profile__info">
-            <h1 class="profile__title">Жак-Ив Кусто</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Исследователь океана</p>
+            <p class="profile__description"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -78,6 +75,8 @@
             <button
               type="submit"
               class="button popup__button popup__button_disabled"
+              data-default-text="Сохранить"
+              data-loading-text="Сохранение..."
               disabled
             >
               Сохранить
@@ -122,6 +121,8 @@
             <button
               type="submit"
               class="button popup__button popup__button_disabled"
+              data-default-text="Создать"
+              data-loading-text="Создание..."
               disabled
             >
               Создать
@@ -158,11 +159,57 @@
             <button
               type="submit"
               class="button popup__button popup__button_disabled"
+              data-default-text="Сохранить"
+              data-loading-text="Сохранение..."
               disabled
             >
               Сохранить
             </button>
           </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_remove-card">
+        <div class="popup__content">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Вы уверены?</h3>
+          <form class="popup__form" name="remove-card" novalidate>
+            <button
+              type="submit"
+              class="button popup__button"
+              data-default-text="Да"
+              data-loading-text="Удаление..."
+            >
+              Да
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="popup popup_type_info">
+        <div class="popup__content popup__content_content_info">
+          <button type="button" class="popup__close"></button>
+          <h3 class="popup__title">Статистика карточек</h3>
+          <dl class="popup__info">
+            <div class="popup__info-item">
+              <dt class="popup__info-term">Всего пользователей:</dt>
+              <dd class="popup__info-description popup__info-description_users">0</dd>
+            </div>
+            <div class="popup__info-item">
+              <dt class="popup__info-term">Всего лайков:</dt>
+              <dd class="popup__info-description popup__info-description_likes">0</dd>
+            </div>
+            <div class="popup__info-item">
+              <dt class="popup__info-term">Максимально лайков от одного:</dt>
+              <dd class="popup__info-description popup__info-description_max-likes">0</dd>
+            </div>
+            <div class="popup__info-item">
+              <dt class="popup__info-term">Чемпион лайков:</dt>
+              <dd class="popup__info-description popup__info-description_champion"></dd>
+            </div>
+          </dl>
+          <h4 class="popup__text">Популярные карточки:</h4>
+          <div class="popup__cards-container"></div>
         </div>
       </div>
     </div>
@@ -179,9 +226,27 @@
           <h2 class="card__title"></h2>
           <div class="card__likes">
             <button type="button" class="card__like-button"></button>
+            <span class="card__likes-count"></span>
           </div>
         </div>
       </li>
+    </template>
+
+    <template id="popup-info-definition-template">
+      <div class="popup__info-item">
+        <dt class="popup__info-term"></dt>
+        <dd class="popup__info-description"></dd>
+      </div>
+    </template>
+    
+    <template id="popup-info-user-preview-template">
+      <li class="popup__list-item popup__list-item_type_badge"></li>
+    </template>
+    
+    <template id="popular-card-template">
+      <span class="popup__popular-card">
+        <span class="popup__popular-card-text"></span>
+      </span>
     </template>
   </body>
 </html>

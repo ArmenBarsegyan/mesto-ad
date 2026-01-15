@@ -13,13 +13,15 @@ const hideInputError = (formElement, inputElement, settings) => {
 };
 
 const checkInputValidity = (formElement, inputElement, settings) => {
-  hideInputError(formElement, inputElement, settings);
-  
-  const isValid = inputElement.checkValidity();
-  
-  if (!isValid) {
-    showInputError(formElement, inputElement, "Текст ошибки", settings);
-  }
+  if (inputElement.validity.patternMismatch)
+    inputElement.setCustomValidity(inputElement.dataset.errorMessage || "");
+  else
+    inputElement.setCustomValidity("");
+
+  if (!inputElement.validity.valid)
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
+  else
+    hideInputError(formElement, inputElement, settings);
 };
 
 const hasInvalidInput = (inputList) =>
@@ -49,10 +51,6 @@ const setEventListeners = (formElement, settings) => {
   toggleButtonState(inputList, buttonElement, settings);
 
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('invalid', (e) => {
-      e.preventDefault();
-    });
-
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, buttonElement, settings);
@@ -64,8 +62,8 @@ export const enableValidation = (settings) => {
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
   
   formList.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
+    formElement.addEventListener("submit", (e) => {
+      e.preventDefault();
     });
 
     formElement.addEventListener('invalid', (e) => {
